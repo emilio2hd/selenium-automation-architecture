@@ -22,6 +22,8 @@
     <!-- Dependencies -->
     <testng.version>7.4.0</testng.version>
     <assertj-core.version>3.11.1</assertj-core.version>
+    <selenium-java.version>3.141.59</selenium-java.version>
+    <webdrivermanager.version>5.0.2</webdrivermanager.version>
 
     <!-- Plugins -->
     <maven.clean.version>3.1.0</maven.clean.version>
@@ -42,6 +44,19 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${assertj-core.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium-java.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>${webdrivermanager.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
