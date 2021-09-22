@@ -1,1 +1,2 @@
 # selenium-automation-architecture
+[![Java CI](https://github.com/emilio2hd/selenium-automation-architecture/actions/workflows/ci.yml/badge.svg)](https://github.com/emilio2hd/selenium-automation-architecture/actions/workflows/ci.yml)
