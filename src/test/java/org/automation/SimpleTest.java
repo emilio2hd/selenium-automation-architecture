@@ -2,12 +2,12 @@ package org.automation;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SimpleTest {
 
     @Test
     public void shouldAnswerWithTrue() {
-        assertTrue( true );
+        assertThat(true).isEqualTo(true);
     }
 }
