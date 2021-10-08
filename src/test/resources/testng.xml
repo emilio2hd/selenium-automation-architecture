@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Main Test Suite">
-    <test name="Complete test run">
+<suite name="Main Test Suite" parallel="classes" thread-count="1">
+    <test name="Complete test run" >
         <packages>
             <package name= "org.automation.*"/>
         </packages>

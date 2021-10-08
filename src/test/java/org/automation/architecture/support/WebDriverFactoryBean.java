@@ -5,11 +5,13 @@ import org.automation.architecture.TestProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> {
+public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> implements DisposableBean {
     private final TestProperties testProperties;
 
     public WebDriverFactoryBean(TestProperties testProperties) {
@@ -23,7 +25,7 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> {
     }
 
     @Override
-    protected WebDriver createInstance() {
+    protected WebDriver createInstance() throws Exception {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
@@ -36,5 +38,15 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> {
         driver.manage().timeouts().implicitlyWait(testProperties.getImplicitlyWaitInMilliseconds(), TimeUnit.MILLISECONDS);
 
         return driver;
+    }
+
+    /**
+     * This method calls webdriver quit, in order to close the browser instance.
+     *
+     * @throws Exception getObject() method could throw exception
+     */
+    @Override
+    public void destroy() throws Exception {
+        Objects.requireNonNull(getObject()).quit();
     }
 }

@@ -1,6 +1,8 @@
 package org.automation.architecture.annotations;
 
+import org.automation.architecture.Constants;
 import org.openqa.selenium.WebDriver;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Inherited;
@@ -28,4 +30,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Component
 @Inherited
+@Scope(Constants.BEAN_SIMPLE_THREAD_SCOPE)
 public @interface PageObject {}
