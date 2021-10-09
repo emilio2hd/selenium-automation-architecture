@@ -31,6 +31,10 @@
     <maven.resources.version>3.0.2</maven.resources.version>
     <maven.compiler.version>3.8.0</maven.compiler.version>
     <maven.surefire.version>2.22.1</maven.surefire.version>
+
+    <!-- Test configurations -->
+    <!-- Set the maximum of threads when running parallel tests -->
+    <test.parallelThreadCount>1</test.parallelThreadCount>
   </properties>
 
   <dependencies>
@@ -111,6 +115,7 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven.surefire.version}</version>
           <configuration>
+            <threadCount>${test.parallelThreadCount}</threadCount>
             <suiteXmlFiles>
               <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
             </suiteXmlFiles>

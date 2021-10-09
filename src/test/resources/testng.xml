@@ -1,6 +1,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--
+Where is the thread-count?
 
-<suite name="Main Test Suite" parallel="classes" thread-count="1">
+The thread-count setting will be passed by maven surefire plugin. You can check the <threadCount>
+tag in <configuration> in the pom.xml.
+The default number is 1 thread, but can be changed when running maven commands, like:
+mvn clean test -Dtest.parallelThreadCount=2
+
+Please, be aware, adding thread-count="" here will hardcode that number and -Dtest.parallelThreadCount won't work.
+ -->
+<suite name="Main Test Suite" parallel="classes">
     <test name="Complete test run" >
         <packages>
             <package name= "org.automation.*"/>
