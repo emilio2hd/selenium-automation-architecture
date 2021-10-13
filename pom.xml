@@ -35,6 +35,8 @@
     <!-- Test configurations -->
     <!-- Set the maximum of threads when running parallel tests -->
     <test.parallelThreadCount>1</test.parallelThreadCount>
+    <!-- Set which browser the tests should run -->
+    <test.browser>chrome</test.browser>
   </properties>
 
   <dependencies>
@@ -116,6 +118,9 @@
           <version>${maven.surefire.version}</version>
           <configuration>
             <threadCount>${test.parallelThreadCount}</threadCount>
+            <systemPropertyVariables>
+              <browserOption>${test.browser}</browserOption>
+            </systemPropertyVariables>
             <suiteXmlFiles>
               <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
             </suiteXmlFiles>

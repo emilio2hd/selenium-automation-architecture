@@ -1,16 +1,24 @@
 package org.automation.architecture.support;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.google.common.base.Enums;
+import com.google.common.base.Optional;
+import org.automation.architecture.Constants;
 import org.automation.architecture.TestProperties;
+import org.automation.architecture.webDriver.WebDriverFactory;
+import org.automation.architecture.exceptions.NoWebDriverFactoryImplementedException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * When a {@link WebDriver} instance is required by Spring, this class will be responsible for providing it.
+ * It will check the {@link System#getProperty(String, String)} for a browser option,
+ * using the key {@link Constants#BROWSER_OPTION_SYS_PROPERTY_KEY}. In case of no option, it will
+ * get the default option from {@link TestProperties#getDefaultBrowseOption()}.
+ */
 public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> implements DisposableBean {
     private final TestProperties testProperties;
 
@@ -26,14 +34,8 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> impleme
 
     @Override
     protected WebDriver createInstance() throws Exception {
-        WebDriverManager.chromedriver().setup();
+        WebDriver driver = getWebDriverFactory().getWebDriverInstance();
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless");
-
-        WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(testProperties.getImplicitlyWaitInMilliseconds(), TimeUnit.MILLISECONDS);
 
@@ -41,12 +43,35 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> impleme
     }
 
     /**
-     * This method calls webdriver quit, in order to close the browser instance.
+     * This method calls WebDrive quit, in order to close the browser instance.
      *
      * @throws Exception getObject() method could throw exception
      */
     @Override
     public void destroy() throws Exception {
         Objects.requireNonNull(getObject()).quit();
+    }
+
+    /**
+     * Based on a browser option, get the WebDrive factory from {@link WebDriverFactory} if it exists in the Enum.
+     *
+     * @return WebDriverFactory is responsible for creating a WebDrive instance
+     * @throws NoWebDriverFactoryImplementedException if the browser option is not supported
+     */
+    private WebDriverFactory getWebDriverFactory() throws NoWebDriverFactoryImplementedException {
+        String browserOption = getBrowserOption();
+
+        Optional<WebDriverFactory> webDriverFactory = Enums.getIfPresent(WebDriverFactory.class, browserOption.toUpperCase());
+        if(!webDriverFactory.isPresent()) {
+            throw new NoWebDriverFactoryImplementedException(browserOption);
+        }
+
+        return webDriverFactory.get();
+    }
+
+    private String getBrowserOption() {
+        return System.getProperty(
+                Constants.BROWSER_OPTION_SYS_PROPERTY_KEY,
+                testProperties.getDefaultBrowseOption());
     }
 }

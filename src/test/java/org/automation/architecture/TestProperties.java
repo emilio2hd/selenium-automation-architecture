@@ -13,8 +13,15 @@ public class TestProperties {
     @Value("${test.implicitlyWaitInMilliseconds}")
     private Long implicitlyWaitInMilliseconds;
 
+    @Value("${test.defaultBrowseOption}")
+    private String defaultBrowseOption;
+
     public String getAppBaseUrl() {
         return appBaseUrl;
+    }
+
+    public String getDefaultBrowseOption() {
+        return defaultBrowseOption;
     }
 
     public Long getImplicitlyWaitInMilliseconds() {
