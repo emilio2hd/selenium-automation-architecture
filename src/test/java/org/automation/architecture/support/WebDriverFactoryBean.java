@@ -2,10 +2,9 @@ package org.automation.architecture.support;
 
 import com.google.common.base.Enums;
 import com.google.common.base.Optional;
-import org.automation.architecture.Constants;
 import org.automation.architecture.TestProperties;
-import org.automation.architecture.webDriver.WebDriverFactory;
 import org.automation.architecture.exceptions.NoWebDriverFactoryImplementedException;
+import org.automation.architecture.webDriver.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
@@ -15,9 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * When a {@link WebDriver} instance is required by Spring, this class will be responsible for providing it.
- * It will check the {@link System#getProperty(String, String)} for a browser option,
- * using the key {@link Constants#BROWSER_OPTION_SYS_PROPERTY_KEY}. In case of no option, it will
- * get the default option from {@link TestProperties#getDefaultBrowseOption()}.
+ * It will check the {@link System#getProperty(String, String)} for a browser option from
+ * {@link TestProperties#getBrowser().
  */
 public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> implements DisposableBean {
     private final TestProperties testProperties;
@@ -59,7 +57,7 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> impleme
      * @throws NoWebDriverFactoryImplementedException if the browser option is not supported
      */
     private WebDriverFactory getWebDriverFactory() throws NoWebDriverFactoryImplementedException {
-        String browserOption = getBrowserOption();
+        String browserOption = testProperties.getBrowser();
 
         Optional<WebDriverFactory> webDriverFactory = Enums.getIfPresent(WebDriverFactory.class, browserOption.toUpperCase());
         if(!webDriverFactory.isPresent()) {
@@ -67,11 +65,5 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> impleme
         }
 
         return webDriverFactory.get();
-    }
-
-    private String getBrowserOption() {
-        return System.getProperty(
-                Constants.BROWSER_OPTION_SYS_PROPERTY_KEY,
-                testProperties.getDefaultBrowseOption());
     }
 }

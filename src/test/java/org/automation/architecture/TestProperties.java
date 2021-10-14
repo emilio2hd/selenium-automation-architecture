@@ -20,8 +20,8 @@ public class TestProperties {
         return appBaseUrl;
     }
 
-    public String getDefaultBrowseOption() {
-        return defaultBrowseOption;
+    public String getBrowser() {
+        return System.getProperty(Constants.BROWSER_OPTION_SYS_PROPERTY_KEY, defaultBrowseOption);
     }
 
     public Long getImplicitlyWaitInMilliseconds() {
