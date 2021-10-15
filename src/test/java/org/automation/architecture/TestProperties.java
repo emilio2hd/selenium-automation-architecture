@@ -24,6 +24,10 @@ public class TestProperties {
         return System.getProperty(Constants.BROWSER_OPTION_SYS_PROPERTY_KEY, defaultBrowseOption);
     }
 
+    public Boolean isBrowserHeadless() {
+        return Boolean.getBoolean(Constants.BROWSER_HEADLESS_SYS_PROPERTY_KEY);
+    }
+
     public Long getImplicitlyWaitInMilliseconds() {
         return implicitlyWaitInMilliseconds;
     }

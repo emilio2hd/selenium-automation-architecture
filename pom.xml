@@ -34,10 +34,22 @@
 
     <!-- Test configurations -->
     <!-- Set the maximum of threads when running parallel tests -->
-    <test.parallelThreadCount>1</test.parallelThreadCount>
+    <test.parallelThreadCount>2</test.parallelThreadCount>
     <!-- Set which browser the tests should run -->
     <test.browser>chrome</test.browser>
+    <!-- Set if should run test displaying the browser or running in the background. -->
+    <test.headless>false</test.headless>
   </properties>
+
+  <profiles>
+    <profile>
+      <id>ci</id>
+      <properties>
+        <test.headless>true</test.headless>
+        <test.parallelThreadCount>1</test.parallelThreadCount>
+      </properties>
+    </profile>
+  </profiles>
 
   <dependencies>
     <dependency>
@@ -120,6 +132,7 @@
             <threadCount>${test.parallelThreadCount}</threadCount>
             <systemPropertyVariables>
               <browserOption>${test.browser}</browserOption>
+              <browserHeadless>${test.headless}</browserHeadless>
             </systemPropertyVariables>
             <suiteXmlFiles>
               <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>

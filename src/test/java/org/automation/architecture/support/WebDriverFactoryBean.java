@@ -32,7 +32,7 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> impleme
 
     @Override
     protected WebDriver createInstance() throws Exception {
-        WebDriver driver = getWebDriverFactory().getWebDriverInstance();
+        WebDriver driver = getWebDriverFactory().getWebDriverInstance(testProperties);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(testProperties.getImplicitlyWaitInMilliseconds(), TimeUnit.MILLISECONDS);

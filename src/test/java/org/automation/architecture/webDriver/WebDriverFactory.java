@@ -1,5 +1,6 @@
 package org.automation.architecture.webDriver;
 
+import org.automation.architecture.TestProperties;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -8,16 +9,16 @@ import org.openqa.selenium.WebDriver;
 public enum WebDriverFactory {
     CHROME {
         @Override
-        public WebDriver getWebDriverInstance() {
-            return ChromeWebDriverFactory.create();
+        public WebDriver getWebDriverInstance(TestProperties testProperties) {
+            return ChromeWebDriverFactory.create(testProperties);
         }
     },
     FIREFOX {
         @Override
-        public WebDriver getWebDriverInstance() {
-            return FirefoxWebDriverFactory.create();
+        public WebDriver getWebDriverInstance(TestProperties testProperties) {
+            return FirefoxWebDriverFactory.create(testProperties);
         }
     };
 
-    public abstract WebDriver getWebDriverInstance();
+    public abstract WebDriver getWebDriverInstance(TestProperties testProperties);
 }
