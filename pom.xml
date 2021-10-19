@@ -25,6 +25,8 @@
     <selenium-java.version>3.141.59</selenium-java.version>
     <webdrivermanager.version>5.0.2</webdrivermanager.version>
     <spring.version>5.3.9</spring.version>
+    <log4j.version>2.14.1</log4j.version>
+    <slf4j-api.version>1.7.32</slf4j-api.version>
 
     <!-- Plugins -->
     <maven.clean.version>3.1.0</maven.clean.version>
@@ -39,6 +41,8 @@
     <test.browser>chrome</test.browser>
     <!-- Set if should run test displaying the browser or running in the background. -->
     <test.headless>false</test.headless>
+    <!-- Set test log level. Default: info -->
+    <test.log_level>info</test.log_level>
   </properties>
 
   <profiles>
@@ -47,6 +51,7 @@
       <properties>
         <test.headless>true</test.headless>
         <test.parallelThreadCount>1</test.parallelThreadCount>
+        <test.log_level>debug</test.log_level>
       </properties>
     </profile>
   </profiles>
@@ -106,6 +111,30 @@
       <version>${spring.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j-api.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -133,6 +162,7 @@
             <systemPropertyVariables>
               <browserOption>${test.browser}</browserOption>
               <browserHeadless>${test.headless}</browserHeadless>
+              <testLogLevel>${test.log_level}</testLogLevel>
             </systemPropertyVariables>
             <suiteXmlFiles>
               <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
