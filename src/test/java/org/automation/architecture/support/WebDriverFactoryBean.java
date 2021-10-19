@@ -6,6 +6,8 @@ import org.automation.architecture.TestProperties;
 import org.automation.architecture.exceptions.NoWebDriverFactoryImplementedException;
 import org.automation.architecture.webDriver.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
@@ -18,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * {@link TestProperties#getBrowser().
  */
 public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> implements DisposableBean {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebDriverFactoryBean.class);
     private final TestProperties testProperties;
 
     public WebDriverFactoryBean(TestProperties testProperties) {
@@ -47,6 +50,7 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> impleme
      */
     @Override
     public void destroy() throws Exception {
+        LOGGER.debug("Quitting WebDriver");
         Objects.requireNonNull(getObject()).quit();
     }
 
@@ -58,9 +62,11 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> impleme
      */
     private WebDriverFactory getWebDriverFactory() throws NoWebDriverFactoryImplementedException {
         String browserOption = testProperties.getBrowser();
+        LOGGER.debug("Checking if there is a WebDriver factory implementation for: {}", browserOption);
 
         Optional<WebDriverFactory> webDriverFactory = Enums.getIfPresent(WebDriverFactory.class, browserOption.toUpperCase());
         if(!webDriverFactory.isPresent()) {
+            LOGGER.error("No WebDriver factory implementation found for: {}", browserOption);
             throw new NoWebDriverFactoryImplementedException(browserOption);
         }
 
