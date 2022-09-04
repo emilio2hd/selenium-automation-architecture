@@ -11,16 +11,32 @@ import org.slf4j.LoggerFactory;
 public class ChromeWebDriverFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(ChromeWebDriverFactory.class);
 
-    public static WebDriver create(TestProperties testProperties) {
+    public static WebDriver create(final TestProperties testProperties) {
         LOGGER.debug("Using WebDriverManager to setup chrome driver.");
+
         WebDriverManager.chromedriver().setup();
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        LOGGER.debug("Setting WebDriver {} ", testProperties.isBrowserHeadless() ? "headless" : "to display browser");
-        options.setHeadless(testProperties.isBrowserHeadless());
+        return new ChromeDriver(getDriverOptions(testProperties.isBrowserHeadless()));
+    }
 
-        return new ChromeDriver(options);
+    private static ChromeOptions getDriverOptions(final boolean isHeadless) {
+        ChromeOptions options = new ChromeOptions();
+
+        /*
+          Disables bubble notification about running development, disables the password saving UI,
+          disables infobar animations, etc.
+          Check https://github.com/GoogleChrome/chrome-launcher/blob/master/docs/chrome-flags-for-tools.md#test--debugging-flags
+         */
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+
+        options.addArguments("--no-sandbox");
+        options.addArguments("--ignore-certificate-errors");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-dev-shm-usage");
+
+        LOGGER.debug("Setting WebDriver {} ", isHeadless ? "headless" : "to display browser");
+        options.setHeadless(isHeadless);
+
+        return options;
     }
 }
