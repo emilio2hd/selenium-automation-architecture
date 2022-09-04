@@ -16,6 +16,15 @@ public class TestProperties {
     @Value("${test.defaultBrowseOption}")
     private String defaultBrowseOption;
 
+    @Value("${test.windowSize.width}")
+    private int windowSizeWidth;
+
+    @Value("${test.windowSize.height}")
+    private int windowSizeHeight;
+
+    @Value("${test.windowMaximized:false}")
+    private Boolean isWindowMaximized;
+
     public String getAppBaseUrl() {
         return appBaseUrl;
     }
@@ -28,7 +37,19 @@ public class TestProperties {
         return Boolean.getBoolean(Constants.BROWSER_HEADLESS_SYS_PROPERTY_KEY);
     }
 
+    public Boolean isWindowMaximized() {
+        return this.isWindowMaximized;
+    }
+
     public Long getImplicitlyWaitInMilliseconds() {
         return implicitlyWaitInMilliseconds;
+    }
+
+    public int getWindowWidth() {
+        return Integer.getInteger(Constants.WINDOW_WIDTH_PROPERTY_KEY, windowSizeWidth);
+    }
+
+    public int getWindowHeight() {
+        return Integer.getInteger(Constants.WINDOW_HEIGHT_PROPERTY_KEY, windowSizeHeight);
     }
 }
