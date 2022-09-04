@@ -5,14 +5,15 @@ import com.google.common.base.Optional;
 import org.automation.architecture.TestProperties;
 import org.automation.architecture.exceptions.NoWebDriverFactoryImplementedException;
 import org.automation.architecture.webDriver.WebDriverFactory;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 
+import java.time.Duration;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * When a {@link WebDriver} instance is required by Spring, this class will be responsible for providing it.
@@ -37,8 +38,17 @@ public class WebDriverFactoryBean extends AbstractFactoryBean<WebDriver> impleme
     protected WebDriver createInstance() throws Exception {
         WebDriver driver = getWebDriverFactory().getWebDriverInstance(testProperties);
 
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(testProperties.getImplicitlyWaitInMilliseconds(), TimeUnit.MILLISECONDS);
+        driver.manage().window().setSize(
+                new Dimension(testProperties.getWindowWidth(), testProperties.getWindowHeight())
+        );
+
+        if (testProperties.isWindowMaximized()) {
+            driver.manage().window().maximize();
+        }
+
+        driver.manage().timeouts().implicitlyWait(
+            Duration.ofMillis(testProperties.getImplicitlyWaitInMilliseconds())
+        );
 
         return driver;
     }
