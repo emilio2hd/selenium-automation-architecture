@@ -23,6 +23,4 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Test with maven using ci profile
-        run: |
-          cd ./automation.core
-          mvn clean test -P ci
+        run: mvn clean test -P ci

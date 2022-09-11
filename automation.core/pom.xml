@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.automation</groupId>
-  <artifactId>selenium-automation-architecture</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <parent>
+    <groupId>org.automation</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 
-  <name>selenium-automation-architecture</name>
+  <artifactId>automation.core</artifactId>
+  <name>automation.core</name>
 
   <properties>
-    <java.version>16</java.version>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-
-    <project.encondig>UTF-8</project.encondig>
-    <project.build.sourceEncoding>${project.encondig}</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>${project.encondig}</project.reporting.outputEncoding>
-
     <!-- Dependencies -->
     <testng.version>7.4.0</testng.version>
     <assertj-core.version>3.11.1</assertj-core.version>
