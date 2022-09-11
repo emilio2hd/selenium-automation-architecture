@@ -64,12 +64,13 @@ public abstract class BaseTest extends AbstractTestNGSpringContextTests {
      * Capture screenshot of current page opened by WebDriver.
      *
      * @param imageName Screenshot image name, saved in the "screenshot/pages".
-     *                  No need to specify extension, as it will save it as {@value ScreenshotUtility#DEFAULT_IMAGE_FORMAT}.
+     *                  No need to specify extension, as it will save it as {@value ScreenshotUtility#DEFAULT_IMAGE_FORMAT}
+     * @param isFullPage Set to screenshot of full page.
      */
-    public void capturePage(final String imageName) {
+    public void capturePage(final String imageName, final Boolean isFullPage) {
         String pageScreenshotDir = ScreenshotDirUtility.getPageDirPath();
         String destinationFile = Paths.get(pageScreenshotDir, String.format("%s.png", imageName)).toString();
 
-        ScreenshotUtility.capturePage(getWebDriver(), destinationFile);
+        ScreenshotUtility.capturePage(getWebDriver(), destinationFile, isFullPage);
     }
 }

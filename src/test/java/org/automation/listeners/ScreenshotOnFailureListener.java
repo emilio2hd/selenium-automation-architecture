@@ -43,7 +43,7 @@ public class ScreenshotOnFailureListener implements ITestListener {
         String failedDirPath = ScreenshotDirUtility.getFailedDirPath();
         String destinationFile = Paths.get(failedDirPath, String.format("%s.png", screenshotName)).toString();
 
-        ScreenshotUtility.capturePage(webDriver, destinationFile);
+        ScreenshotUtility.capturePage(webDriver, destinationFile, true);
 
         return destinationFile;
     }
