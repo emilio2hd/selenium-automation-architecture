@@ -1,10 +1,10 @@
-package org.automation;
+package org.automation.architecture;
 
-import org.automation.architecture.Constants;
-import org.automation.architecture.support.screenshot.ScreenshotUtility;
+import org.automation.TestContextConfig;
+import org.automation.architecture.listeners.PrepareBeforeRunningSuiteListener;
+import org.automation.architecture.listeners.ScreenshotOnFailureListener;
 import org.automation.architecture.support.screenshot.ScreenshotDirUtility;
-import org.automation.listeners.ScreenshotOnFailureListener;
-import org.automation.listeners.PrepareBeforeRunningSuiteListener;
+import org.automation.architecture.support.screenshot.ScreenshotUtility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public abstract class BaseTest extends AbstractTestNGSpringContextTests {
 
     /**
      * Due to parallel setting per "classes", each test class will run on a thread and has its own WebDriver instance.
-     * The {@link org.springframework.beans.factory.support.DefaultListableBeanFactory#destroyBean(Object)},
+     * The {@link DefaultListableBeanFactory#destroyBean(Object)},
      * will tell spring to destroy the bean created for the thread, consequently calling the
      * {@link org.automation.architecture.support.WebDriverFactoryBean#destroy()}.
      */

@@ -1,8 +1,9 @@
-package org.automation.listeners;
+package org.automation.architecture.listeners;
 
-import org.automation.BaseTest;
-import org.automation.architecture.support.screenshot.ScreenshotUtility;
+
+import org.automation.architecture.BaseTest;
 import org.automation.architecture.support.screenshot.ScreenshotDirUtility;
+import org.automation.architecture.support.screenshot.ScreenshotUtility;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

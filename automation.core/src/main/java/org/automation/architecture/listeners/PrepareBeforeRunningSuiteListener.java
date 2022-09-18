@@ -1,4 +1,4 @@
-package org.automation.listeners;
+package org.automation.architecture.listeners;
 
 import org.automation.architecture.support.screenshot.ScreenshotDirUtility;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 
 /**
  * Listener to be used in order to do stuff before running automated tests suite,
- * as this listener will be used by {@link org.automation.BaseTest}.
+ * as this listener will be used by {@link org.automation.architecture.BaseTest}.
  */
 public class PrepareBeforeRunningSuiteListener implements ISuiteListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(PrepareBeforeRunningSuiteListener.class);

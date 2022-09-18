@@ -12,7 +12,7 @@ Please, be aware, adding thread-count="" here will hardcode that number and -Dte
 <suite name="Main Test Suite" parallel="classes">
     <test name="Complete test run" >
         <packages>
-            <package name= "org.automation.*"/>
+            <package name= "org.automation.regression_tests.*"/>
         </packages>
     </test>
 </suite>

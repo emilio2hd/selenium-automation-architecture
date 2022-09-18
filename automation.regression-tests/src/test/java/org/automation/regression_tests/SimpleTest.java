@@ -1,6 +1,7 @@
-package org.automation;
+package org.automation.regression_tests;
 
-import org.automation.pages.SpringHomePage;
+import org.automation.architecture.BaseTest;
+import org.automation.regression_tests.pages.SpringHomePage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 

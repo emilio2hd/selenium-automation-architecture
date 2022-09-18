@@ -12,6 +12,7 @@
 
     <modules>
         <module>automation.core</module>
+        <module>automation.regression-tests</module>
     </modules>
 
     <properties>
@@ -22,5 +23,64 @@
         <project.encoding>UTF-8</project.encoding>
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
+
+        <!-- Dependencies -->
+        <assertj-core.version>3.11.1</assertj-core.version>
+        <log4j.version>[2.17.1,)</log4j.version>
+        <selenium-java.version>4.4.0</selenium-java.version>
+        <slf4j-api.version>1.7.32</slf4j-api.version>
+        <spring.version>[5.3.20,)</spring.version>
+        <testng.version>7.4.0</testng.version>
+        <webdrivermanager.version>5.3.0</webdrivermanager.version>
+
+        <!-- Plugins -->
+        <maven.clean.version>3.1.0</maven.clean.version>
+        <maven.resources.version>3.0.2</maven.resources.version>
+        <maven.compiler.version>3.8.0</maven.compiler.version>
+        <maven.surefire.version>2.22.1</maven.surefire.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+    </dependencies>
 </project>
