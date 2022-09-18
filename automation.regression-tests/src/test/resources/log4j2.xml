@@ -14,7 +14,7 @@
         </Console>
 
         <RollingFile name="RollingFile"
-                     filename="${BASE_PATH}/core.tests.log"
+                     filename="${BASE_PATH}/regression-test.log"
                      filepattern="${BASE_PATH}/%d{yyyy-MM-dd}-%i-test.log">
             <PatternLayout pattern="${LOG_PATTERN}" />
             <Policies>

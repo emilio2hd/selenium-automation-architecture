@@ -1,6 +1,5 @@
-package org.automation.pages;
+package org.automation.regression_tests.pages;
 
-import org.automation.SimpleTest;
 import org.automation.architecture.TestProperties;
 import org.automation.architecture.annotations.PageObject;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @PageObject
 public class SpringHomePage {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SpringHomePage.class);
 
     @Autowired
     WebDriver webDriver;
