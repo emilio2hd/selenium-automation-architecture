@@ -14,6 +14,6 @@ public class SimpleTest extends BaseTest {
     @Test
     public void shouldAnswerWithTrue() {
         springHomePage.visit();
-        assertThat(springHomePage.hero.getText()).contains("Spring");
+        assertThat(springHomePage.getTitle()).contains("Spring");
     }
 }

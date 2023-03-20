@@ -33,6 +33,7 @@ public class ChromeWebDriverFactory {
         options.addArguments("--ignore-certificate-errors");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--remote-allow-origins=*");
 
         LOGGER.debug("Setting WebDriver {} ", isHeadless ? "headless" : "to display browser");
         options.setHeadless(isHeadless);

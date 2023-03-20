@@ -18,11 +18,12 @@ public class SpringHomePage {
     @Autowired
     TestProperties testProperties;
 
-    @FindBy(id = "hero")
-    public WebElement hero;
-
     public void visit() {
         LOGGER.info("Visiting: {}", testProperties.getAppBaseUrl());
         webDriver.get(testProperties.getAppBaseUrl());
+    }
+
+    public String getTitle() {
+        return webDriver.getTitle();
     }
 }
