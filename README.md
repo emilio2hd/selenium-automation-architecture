@@ -5,7 +5,7 @@
 It's using spring, so it might leverage to understand some basic concepts about like
 Dependency Injection and Inversion of Control.
 
-# Continues Integration
+# Continuous integration
 The project has been made thinking on CI there are a couple of options that can be provided as maven params.
 There is a "ci" profile in the `pom.xml` file, which will set to run the test headless on single thread with
 log level = info.  In order to run the tests using the "ci" profile, use the following code:
